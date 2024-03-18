@@ -1,29 +1,29 @@
 //
-//  HomeView.swift
+//  SearchView.swift
 //  ClothingStore-iOS
 //
-//  Created by Navin Thamindu on 2024-03-17.
+//  Created by Navin Thamindu on 2024-03-18.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct ClothingProduct: Identifiable {
+struct ClothingProductK: Identifiable {
     var id = UUID()
     var name: String
     var category: String
     var price: Double
 }
 
-struct HomeView: View {
+struct SearchView: View {
     
     @State private var isSidebarShowing = false
 
-    let products: [ClothingProduct] = [
-            ClothingProduct(name: "T-Shirto", category: "Men's Clothing", price: 19.99),
-            ClothingProduct(name: "Jeans", category: "Women's Clothing", price: 39.99),
-            ClothingProduct(name: "Dress Shirt", category: "Men's Clothing", price: 29.99),
-            ClothingProduct(name: "Skirt", category: "Women's Clothing", price: 24.99),
+    let products: [ClothingProductK] = [
+            ClothingProductK(name: "T-Shirto", category: "Men's Clothing", price: 19.99),
+            ClothingProductK(name: "Jeans", category: "Women's Clothing", price: 39.99),
+            ClothingProductK(name: "Dress Shirt", category: "Men's Clothing", price: 29.99),
+            ClothingProductK(name: "Skirt", category: "Women's Clothing", price: 24.99),
             // Add more clothing products as needed
         ]
         
@@ -39,17 +39,28 @@ struct HomeView: View {
                     
                     //scroll content
                     ScrollView {
-                        
-                        //hero image
-                        KFImage.url(URL(string:"https://i.ibb.co/T1fzbwr/Group-12.png")).resizable().scaledToFill().frame(height: 200).cornerRadius(1)
-                        
-                        HStack {
-                            Text("For You")
-                                .font(.title)
+                        VStack{
+                            
+                            HStack {
+                                Text("Searching for 'POLO'")
+                                .font(.callout)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .alignmentGuide(.leading) { _ in 0 }
+                                
+                                Spacer();
+                                
+                                Button(action: {
+                                    // Action for right icon 1
+                                }) {
+                                    Image(systemName: "slider.horizontal.3")
+                                    Text("Refine").font(.caption)
+                                }
+                                
+                                
+                            }
+                            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                         }
-                        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                        
 
                         //Item Grid
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
@@ -108,5 +119,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    SearchView()
 }
+
