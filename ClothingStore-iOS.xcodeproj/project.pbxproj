@@ -14,6 +14,9 @@
 		8D559F3A2BA746C9004752C8 /* ClothingStore_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F392BA746C9004752C8 /* ClothingStore_iOSTests.swift */; };
 		8D559F442BA746C9004752C8 /* ClothingStore_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F432BA746C9004752C8 /* ClothingStore_iOSUITests.swift */; };
 		8D559F462BA746C9004752C8 /* ClothingStore_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F452BA746C9004752C8 /* ClothingStore_iOSUITestsLaunchTests.swift */; };
+		8D559F572BA750BA004752C8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F562BA750BA004752C8 /* HomeView.swift */; };
+		8D559F5A2BA75A29004752C8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8D559F592BA75A29004752C8 /* Kingfisher */; };
+		8D559F5C2BA774B6004752C8 /* SearchbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F5B2BA774B6004752C8 /* SearchbarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 		8D559F3F2BA746C9004752C8 /* ClothingStore-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ClothingStore-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559F432BA746C9004752C8 /* ClothingStore_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSUITests.swift; sourceTree = "<group>"; };
 		8D559F452BA746C9004752C8 /* ClothingStore_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8D559F562BA750BA004752C8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8D559F5B2BA774B6004752C8 /* SearchbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchbarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D559F5A2BA75A29004752C8 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +100,10 @@
 		8D559F272BA746C7004752C8 /* ClothingStore-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8D559F552BA75087004752C8 /* Helpers */,
+				8D559F542BA7507A004752C8 /* Models */,
+				8D559F532BA75070004752C8 /* Controllers */,
+				8D559F522BA75063004752C8 /* Views */,
 				8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */,
 				8D559F2A2BA746C7004752C8 /* ContentView.swift */,
 				8D559F2C2BA746C9004752C8 /* Assets.xcassets */,
@@ -127,6 +137,36 @@
 			path = "ClothingStore-iOSUITests";
 			sourceTree = "<group>";
 		};
+		8D559F522BA75063004752C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8D559F562BA750BA004752C8 /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8D559F532BA75070004752C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8D559F542BA7507A004752C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8D559F552BA75087004752C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8D559F5B2BA774B6004752C8 /* SearchbarView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +183,9 @@
 			dependencies = (
 			);
 			name = "ClothingStore-iOS";
+			packageProductDependencies = (
+				8D559F592BA75A29004752C8 /* Kingfisher */,
+			);
 			productName = "ClothingStore-iOS";
 			productReference = 8D559F252BA746C7004752C8 /* ClothingStore-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +258,9 @@
 				Base,
 			);
 			mainGroup = 8D559F1C2BA746C7004752C8;
+			packageReferences = (
+				8D559F582BA75A29004752C8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 8D559F262BA746C7004752C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,6 +303,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D559F5C2BA774B6004752C8 /* SearchbarView.swift in Sources */,
+				8D559F572BA750BA004752C8 /* HomeView.swift in Sources */,
 				8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */,
 				8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */,
 			);
@@ -582,6 +630,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8D559F582BA75A29004752C8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8D559F592BA75A29004752C8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D559F582BA75A29004752C8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8D559F1D2BA746C7004752C8 /* Project object */;
 }
