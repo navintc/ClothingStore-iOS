@@ -69,7 +69,7 @@ struct HomeView: View {
                                         .foregroundColor(.blue)
                                 }
                                 .padding()
-                                .background(Color.white)
+                                .background(Color(UIColor.systemBackground))
                                 .cornerRadius(10)
                                 
                             }
@@ -87,6 +87,7 @@ struct HomeView: View {
                                 // Action for right icon 1
                             }) {
                                 Image(systemName: "cart.fill")
+                                    .foregroundColor(Color("indigo"))
                             }
                             
                             Button(action: {
@@ -94,6 +95,7 @@ struct HomeView: View {
                                 isSidebarShowing.toggle()
                             }) {
                                 Image(systemName: "circle.grid.3x3.fill")
+                                    .foregroundColor(Color("indigo"))
                             }
                         }
                 )

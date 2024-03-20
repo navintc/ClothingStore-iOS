@@ -18,6 +18,7 @@ struct ClothingProductK: Identifiable {
 struct SearchView: View {
     
     @State private var isSidebarShowing = false
+    @State private var isShowingPopover = false
 
     let products: [ClothingProductK] = [
             ClothingProductK(name: "T-Shirto", category: "Men's Clothing", price: 19.99),
