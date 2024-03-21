@@ -66,7 +66,7 @@ struct HomeView: View {
                                     
                                     Text("$\(product.price, specifier: "%.2f")")
                                         .font(.headline)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(Color("Primary"))
                                 }
                                 .padding()
                                 .background(Color(UIColor.systemBackground))
@@ -87,7 +87,7 @@ struct HomeView: View {
                                 // Action for right icon 1
                             }) {
                                 Image(systemName: "cart.fill")
-                                    .foregroundColor(Color("indigo"))
+                                    .foregroundColor(Color("Primary"))
                             }
                             
                             Button(action: {
@@ -95,7 +95,7 @@ struct HomeView: View {
                                 isSidebarShowing.toggle()
                             }) {
                                 Image(systemName: "circle.grid.3x3.fill")
-                                    .foregroundColor(Color("indigo"))
+                                    .foregroundColor(Color("Primary"))
                             }
                         }
                 )

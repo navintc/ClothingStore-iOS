@@ -46,15 +46,16 @@ struct SearchView: View {
                                 Text("Searching for 'POLO'")
                                 .font(.callout)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .alignmentGuide(.leading) { _ in 0 }
-                                
+                                .alignmentGuide(.leading) { _ in 0 }                                
                                 Spacer();
                                 
                                 Button(action: {
                                     // Action for right icon 1
                                 }) {
                                     Image(systemName: "slider.horizontal.3")
+                                    .foregroundColor(Color("Primary"))
                                     Text("Refine").font(.caption)
+                                    .foregroundColor(Color("Primary"))
                                 }
                                 
                                 
@@ -78,10 +79,10 @@ struct SearchView: View {
                                     
                                     Text("$\(product.price, specifier: "%.2f")")
                                         .font(.headline)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(Color("Primary"))
                                 }
                                 .padding()
-                                .background(Color.white)
+                                .background(Color(UIColor.systemBackground))
                                 .cornerRadius(10)
                                 
                             }
@@ -99,6 +100,7 @@ struct SearchView: View {
                                 // Action for right icon 1
                             }) {
                                 Image(systemName: "cart.fill")
+                                .foregroundColor(Color("Primary"))
                             }
                             
                             Button(action: {
@@ -106,6 +108,7 @@ struct SearchView: View {
                                 isSidebarShowing.toggle()
                             }) {
                                 Image(systemName: "circle.grid.3x3.fill")
+                                .foregroundColor(Color("Primary"))
                             }
                         }
                 )
