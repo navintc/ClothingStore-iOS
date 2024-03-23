@@ -28,131 +28,96 @@ struct CartView: View {
     ]
 
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                
-                Spacer()
-                HStack{
-                    Text("Cart")
-                        .font(.title)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(20)
-                }
-                //scroll content
+       
+        VStack {
+            //scroll content
+            ScrollView {
+                //Item Grid
                 ScrollView {
-                    //Item Grid
-                    ScrollView {
-                        ForEach(cartItems) { item in
-                            HStack {
-                                KFImage.url(URL(string:"https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 80, height: 80)
-                                    .cornerRadius(8)
-                                
-                                VStack(alignment: .leading) {
-                                    Text(item.name)
-                                        .font(.headline)
-                                    Text("\(item.quantity) x $\(item.price, specifier: "%.2f")")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Text(item.category)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(10)
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    // Action for trash button
-                                }) {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(Color("Alert"))
-                                }
+                    ForEach(cartItems) { item in
+                        HStack {
+                            KFImage.url(URL(string:"https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .cornerRadius(8)
+                            
+                            VStack(alignment: .leading) {
+                                Text(item.name)
+                                    .font(.headline)
+                                Text("\(item.quantity) x $\(item.price, specifier: "%.2f")")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                Text(item.category)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
                             }
-                            .padding()
-                            .background(Color(UIColor.systemBackground))
-                            .cornerRadius(10)
+                            .padding(10)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                // Action for trash button
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(Color("Alert"))
+                            }
                         }
+                        .padding()
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(10)
                     }
-
-                    .padding()
+                    Spacer()
                 }
-                .background(Color.gray.opacity(0.1).ignoresSafeArea())
-                
+
+                .padding()
                 Spacer()
-                     
-                
-                VStack{
-                    HStack {
-                        Text("Total:")
-                            .font(.headline)
-                        Spacer()
-                        Text("$53795")
-                            .font(.headline)
-                    }
-                    .padding()
-                    
-                    HStack {
-                        Button(action: {
-                                        // Action for back button
-                        }) {
-                            Text("Back")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.gray.opacity(0.5))
-                                .foregroundColor(Color("Primary"))
-                                .cornerRadius(10)
-                        }
-                        
-                        Button(action: {
-                            // Action for checkout button
-                        }) {
-                            Text("Checkout")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("Primary"))
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding()
+            }
+            .background(Color.gray.opacity(0.1).ignoresSafeArea())
+            
+            
+            
+                 
+            
+            VStack{
+                HStack {
+                    Text("Total:")
+                        .font(.headline)
+                    Spacer()
+                    Text("$53795")
+                        .font(.headline)
                 }
                 .padding()
-
-            }
-            .navigationBarTitle("NAV ANDRS")
-            .navigationBarItems(
-                leading: Spacer(),
-                trailing:
-                    HStack {
-                        Button(action: {
-                            // Action for right icon 1
-                        }) {
-                            Image(systemName: "cart.fill")
-                                .foregroundColor(Color("Primary"))
-                        }
-                        
-                        Button(action: {
-                            // Action for right icon 2
-                            isSidebarShowing.toggle()
-                        }) {
-                            Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(Color("Primary"))
-                        }
+                
+                HStack {
+                    Button(action: {
+                                    // Action for back button
+                    }) {
+                        Text("Back")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.gray.opacity(0.5))
+                            .foregroundColor(Color("Primary"))
+                            .cornerRadius(10)
                     }
-            )
-            .sheet(isPresented: $isSidebarShowing) {
-                // sidebar content
-                CatagoriesView()
+                    
+                    Button(action: {
+                        // Action for checkout button
+                    }) {
+                        Text("Checkout")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color("Primary"))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding()
             }
-            
-        
-        }
+            .padding()
 
-        
+        }
+        .navigationTitle("Cart")
     }
 }
 

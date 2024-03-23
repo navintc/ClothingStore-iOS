@@ -19,106 +19,91 @@ struct SearchView: View {
     
     @State private var isSidebarShowing = false
     @State private var isShowingPopover = false
+    @State private var searchText = ""
+    @State private var resultedQuery = ""
+    @State private var searchResults: [Cloth] = []
+    
+    func searchCloths(query: String) {
+        guard let url = URL(string: "http://localhost:3000/api/cloths/search?query=\(query)") else {
+            print("Invalid URL")
+            return
+        }
 
-    let products: [ClothingProductK] = [
-            ClothingProductK(name: "T-Shirto", category: "Men's Clothing", price: 19.99),
-            ClothingProductK(name: "Jeans", category: "Women's Clothing", price: 39.99),
-            ClothingProductK(name: "Dress Shirt", category: "Men's Clothing", price: 29.99),
-            ClothingProductK(name: "Skirt", category: "Women's Clothing", price: 24.99),
-            // Add more clothing products as needed
-        ]
-        
-        let sampleImageURL = "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1620&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        
-        @State private var searchText = ""
-
-        var body: some View {
-            NavigationView {
-                VStack {
-                    SearchbarView(searchText: $searchText);
-                    Spacer()
-                    
-                    //scroll content
-                    ScrollView {
-                        VStack{
-                            
-                            HStack {
-                                Text("Searching for 'POLO'")
-                                .font(.callout)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .alignmentGuide(.leading) { _ in 0 }                                
-                                Spacer();
-                                
-                                Button(action: {
-                                    // Action for right icon 1
-                                }) {
-                                    Image(systemName: "slider.horizontal.3")
-                                    .foregroundColor(Color("Primary"))
-                                    Text("Refine").font(.caption)
-                                    .foregroundColor(Color("Primary"))
-                                }
-                                
-                                
-                            }
-                            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                        }
-                        
-
-                        //Item Grid
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-                            ForEach(products) { product in
-                                VStack(alignment: .leading, spacing: 8) {
-                                    KFImage.url(URL(string:sampleImageURL)).resizable().scaledToFill().frame(height: 150).cornerRadius(8)
-                                    
-                                    Text(product.name)
-                                        .font(.headline)
-                                    
-                                    Text(product.category)
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    
-                                    Text("$\(product.price, specifier: "%.2f")")
-                                        .font(.headline)
-                                        .foregroundColor(Color("Primary"))
-                                }
-                                .padding()
-                                .background(Color(UIColor.systemBackground))
-                                .cornerRadius(10)
-                                
-                            }
-                        }
-                        .padding()
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode([Cloth].self, from: data) {
+                    DispatchQueue.main.async {
+                        self.searchResults = decodedResponse
+                        self.resultedQuery = searchText
                     }
-                    .background(Color.gray.opacity(0.1).ignoresSafeArea())
+                    return
                 }
-                .navigationBarTitle("NAV ANDRS")
-                .navigationBarItems(
-                    leading: Spacer(),
-                    trailing:
-                        HStack {
-                            Button(action: {
-                                // Action for right icon 1
-                            }) {
-                                Image(systemName: "cart.fill")
-                                .foregroundColor(Color("Primary"))
-                            }
-                            
-                            Button(action: {
-                                // Action for right icon 2
-                                isSidebarShowing.toggle()
-                            }) {
-                                Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(Color("Primary"))
-                            }
+            }
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+        }.resume()
+    }
+
+    var body: some View {
+        VStack {
+            SearchbarView(searchText: $searchText, onSearch: searchCloths)
+            
+            //scroll content
+            ScrollView {
+                VStack{
+                    HStack {
+                        Text("Searching for '\(resultedQuery)'")
+                        .font(.callout)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .alignmentGuide(.leading) { _ in 0 }
+                        Spacer();
+                        
+                        Button(action: {
+                            // Action for right icon 1
+                        }) {
+                            Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(Color("Primary"))
+                            Text("Refine").font(.caption)
+                            .foregroundColor(Color("Primary"))
                         }
-                )
-                .sheet(isPresented: $isSidebarShowing) {
-                    // sidebar content
-                    CatagoriesView()
+                    }
+                    .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 }
                 
-            
+
+                //Item Grid
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+
+                    ForEach(searchResults) { cloth in
+                        NavigationLink(destination: ProductView(product: cloth)) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                KFImage.url(URL(string:cloth.imageurl)).resizable().scaledToFill().frame(height: 150).cornerRadius(8)
+                                
+                                Text(cloth.name)
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                    .multilineTextAlignment(.leading)
+                                
+                                Text(cloth.category)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                
+                                Text("$\(cloth.price, specifier: "%.2f")")
+                                    .font(.headline)
+                                    .foregroundColor(Color("Primary"))
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .cornerRadius(10)
+                        }
+                    }
+                }
+                .padding()
+            }
+            .background(Color.gray.opacity(0.1).ignoresSafeArea())
         }
+        .navigationTitle("Cart")
+
+        
     }
 }
 

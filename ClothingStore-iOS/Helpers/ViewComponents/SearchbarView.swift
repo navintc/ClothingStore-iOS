@@ -9,14 +9,15 @@ import SwiftUI
 
 struct SearchbarView: View {
     @Binding var searchText: String
+    var onSearch: (String) -> Void
 
     var body: some View {
-        VStack{
+        VStack {
             HStack {
                 TextField("Search", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: {
-                    // Perform search action
+                    onSearch(searchText)
                 }) {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(Color("Primary"))
@@ -26,3 +27,4 @@ struct SearchbarView: View {
         }
     }
 }
+

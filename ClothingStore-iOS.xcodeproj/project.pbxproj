@@ -11,6 +11,7 @@
 		8D52E4342BAB3180001AF380 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4332BAB3180001AF380 /* SigninView.swift */; };
 		8D52E4362BAB4D3F001AF380 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4352BAB4D3F001AF380 /* PaymentView.swift */; };
 		8D52E4382BABEB0C001AF380 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4372BABEB0B001AF380 /* ProfileView.swift */; };
+		8D52E43A2BACD4A1001AF380 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4392BACD4A1001AF380 /* ProductView.swift */; };
 		8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */; };
 		8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F2A2BA746C7004752C8 /* ContentView.swift */; };
 		8D559F2D2BA746C9004752C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D559F2C2BA746C9004752C8 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		8D52E4332BAB3180001AF380 /* SigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninView.swift; sourceTree = "<group>"; };
 		8D52E4352BAB4D3F001AF380 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		8D52E4372BABEB0B001AF380 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8D52E4392BACD4A1001AF380 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		8D559F252BA746C7004752C8 /* ClothingStore-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ClothingStore-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSApp.swift; sourceTree = "<group>"; };
 		8D559F2A2BA746C7004752C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				8D52E4332BAB3180001AF380 /* SigninView.swift */,
 				8D52E4352BAB4D3F001AF380 /* PaymentView.swift */,
 				8D52E4372BABEB0B001AF380 /* ProfileView.swift */,
+				8D52E4392BACD4A1001AF380 /* ProductView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				8D559F6B2BAAA8DD004752C8 /* Theme.swift in Sources */,
 				8D52E4342BAB3180001AF380 /* SigninView.swift in Sources */,
 				8D52E4382BABEB0C001AF380 /* ProfileView.swift in Sources */,
+				8D52E43A2BACD4A1001AF380 /* ProductView.swift in Sources */,
 				8D559F662BA8E1AE004752C8 /* CartView.swift in Sources */,
 				8D52E4322BAB006A001AF380 /* LoginView.swift in Sources */,
 				8D559F5C2BA774B6004752C8 /* SearchbarView.swift in Sources */,
