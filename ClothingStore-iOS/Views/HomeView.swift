@@ -53,7 +53,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
+             
                 Spacer()
                 
                 //scroll content
@@ -107,6 +107,11 @@ struct HomeView: View {
                 leading: Spacer(),
                 trailing:
                     HStack {
+                        NavigationLink(destination: SearchView()) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(Color("Primary"))
+                        }
+                        
                         NavigationLink(destination: CartView()) {
                                 Image(systemName: "cart.fill")
                                     .foregroundColor(Color("Primary"))
