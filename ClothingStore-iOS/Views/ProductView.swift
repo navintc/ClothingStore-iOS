@@ -65,7 +65,7 @@ struct ProductView: View {
                         
                     }.padding(.horizontal, 20)
                 }
-                .background(Color("BackgroundAccent"))
+                .background(BackgroundAccent)
                 
                 Spacer()
                 
@@ -129,7 +129,7 @@ struct ProductView: View {
                             Text("Add to Cart")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color("Primary"))
+                                .background(BrandPrimary)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                         }

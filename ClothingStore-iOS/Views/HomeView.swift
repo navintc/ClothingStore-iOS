@@ -45,7 +45,7 @@ struct HomeView: View {
                                     
                                     Text("$\(product.price, specifier: "%.2f")")
                                         .font(.headline)
-                                        .foregroundColor(Color("Primary"))
+                                        .foregroundColor(BrandPrimary)
                                 }
                                 .padding()
                                 .background(Color(UIColor.systemBackground))
@@ -64,19 +64,19 @@ struct HomeView: View {
                     HStack {
                         NavigationLink(destination: SearchView()) {
                             Image(systemName: "magnifyingglass")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                         }
                         
                         NavigationLink(destination: CartView()) {
                             Image(systemName: "cart.fill")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                         }
                         
                         Button(action: {
                             isSidebarShowing.toggle()
                         }) {
                             Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                         }
                     }
             )

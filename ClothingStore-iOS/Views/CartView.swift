@@ -60,7 +60,7 @@ struct CartView: View {
                                 // Action for trash button
                             }) {
                                 Image(systemName: "trash")
-                                    .foregroundColor(Color("Alert"))
+                                    .foregroundColor(Alert)
                             }
                         }
                         .padding()
@@ -97,7 +97,7 @@ struct CartView: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.gray.opacity(0.5))
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(BrandPrimary)
                             .cornerRadius(10)
                     }
                     
@@ -107,7 +107,7 @@ struct CartView: View {
                         Text("Checkout")
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color("Primary"))
+                            .background(BrandPrimary)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }

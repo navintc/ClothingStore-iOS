@@ -43,7 +43,7 @@ struct LoginView: View {
                         Text("Login")
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color("Primary"))
+                            .background(BrandPrimary)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
@@ -58,7 +58,7 @@ struct LoginView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.gray.opacity(0.5))
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                                 .cornerRadius(10)
                         }
                     }.padding(.vertical, 50)
@@ -88,7 +88,7 @@ struct LoginView: View {
                             // Action for right icon 1
                         }) {
                             Image(systemName: "cart.fill")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                         }
                         
                         Button(action: {
@@ -96,7 +96,7 @@ struct LoginView: View {
                             isSidebarShowing.toggle()
                         }) {
                             Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(Color("Primary"))
+                                .foregroundColor(BrandPrimary)
                         }
                     }
             )

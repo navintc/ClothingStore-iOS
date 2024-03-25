@@ -20,7 +20,7 @@ struct SearchbarView: View {
                     onSearch(searchText)
                 }) {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(BrandPrimary)
                 }
             }
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))

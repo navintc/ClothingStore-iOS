@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Theme {
-//    static let dark = Color(systemIndigo)
-    // Define other colors and styles for your theme
-}
+//COLOR
+let BrandPrimary: Color = Color("Primary")
+let AlertColor: Color = Color("Alert")
+let BackgroundAccent: Color = Color("BackgroundAccent")

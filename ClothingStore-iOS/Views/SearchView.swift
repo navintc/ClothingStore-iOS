@@ -35,9 +35,9 @@ struct SearchView: View {
                                 }
                             } label: {
                                 Image(systemName: "slider.horizontal.3")
-                                    .foregroundColor(Color("Primary"))
+                                    .foregroundColor(BrandPrimary)
                                 Text("Refine").font(.caption)
-                                    .foregroundColor(Color("Primary"))
+                                    .foregroundColor(BrandPrimary)
                             }
                         }
                         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
@@ -60,7 +60,7 @@ struct SearchView: View {
                                     
                                     Text("$\(cloth.price, specifier: "%.2f")")
                                         .font(.headline)
-                                        .foregroundColor(Color("Primary"))
+                                        .foregroundColor(BrandPrimary)
                                 }
                                 .padding()
                                 .background(Color(UIColor.systemBackground))
