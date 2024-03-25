@@ -8,59 +8,32 @@
 import SwiftUI
 import Kingfisher
 
-struct ClothingProductK: Identifiable {
-    var id = UUID()
-    var name: String
-    var category: String
-    var price: Double
-}
-
 struct SearchView: View {
+    @StateObject private var viewModel = SearchViewModel()
+    @State private var sortOption: SearchViewModel.SortOption?
     
-    @State private var isSidebarShowing = false
-    @State private var isShowingPopover = false
-    @State private var searchText = ""
-    @State public var resultedQuery = ""
-    @State public var searchResults: [Cloth] = []
-    
-    func searchCloths(query: String) {
-        guard let url = URL(string: "http://localhost:3000/api/cloths/search?query=\(query)") else {
-            print("Invalid URL")
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode([Cloth].self, from: data) {
-                    DispatchQueue.main.async {
-                        self.searchResults = decodedResponse
-                        self.resultedQuery = searchText
-                    }
-                    return
-                }
-            }
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-        }.resume()
-    }
-
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
-                SearchbarView(searchText: $searchText, onSearch: searchCloths)
+                SearchbarView(searchText: $viewModel.searchText, onSearch: viewModel.searchCloths)
                 
-                //scroll content
                 ScrollView {
-                    VStack{
+                    VStack {
                         HStack {
-                            Text("Searching for '\(resultedQuery)'")
+                            Text("Searching for '\(viewModel.resultedQuery)'")
                                 .font(.callout)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .alignmentGuide(.leading) { _ in 0 }
-                            Spacer();
+                            Spacer()
                             
-                            Button(action: {
-                                // Action for right icon 1
-                            }) {
+                            Menu {
+                                ForEach(SearchViewModel.SortOption.allCases, id: \.self) { option in
+                                    Button(option.rawValue) {
+                                        sortOption = option
+                                        viewModel.sortResults(sortOption: option)
+                                    }
+                                }
+                            } label: {
                                 Image(systemName: "slider.horizontal.3")
                                     .foregroundColor(Color("Primary"))
                                 Text("Refine").font(.caption)
@@ -70,14 +43,11 @@ struct SearchView: View {
                         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                     }
                     
-                    
-                    //Item Grid
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-                        
-                        ForEach(searchResults) { cloth in
+                        ForEach(viewModel.searchResults) { cloth in
                             NavigationLink(destination: ProductView(product: cloth)) {
                                 VStack(alignment: .leading, spacing: 8) {
-                                    KFImage.url(URL(string:cloth.imageurl)).resizable().scaledToFill().frame(height: 150).cornerRadius(8)
+                                    KFImage.url(URL(string: cloth.imageurl)).resizable().scaledToFill().frame(height: 150).cornerRadius(8)
                                     
                                     Text(cloth.name)
                                         .font(.headline)
@@ -102,12 +72,12 @@ struct SearchView: View {
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
             }
-            
+            .navigationTitle("Cart")
         }
-        .navigationTitle("Cart")
-        
     }
 }
+
+
 
 #Preview {
     SearchView()

@@ -28,7 +28,7 @@ extension Color {
 struct ProductView: View {
     @State private var isSidebarShowing = false
     let sizes = ["XS", "S", "M", "L", "XL", "XXL"]
-        @State private var selectedSize = "M"
+    @ObservedObject var viewModel = ProductViewModel()
     
     var product: Cloth
     @State private var products: [Cloth] = []
@@ -103,14 +103,14 @@ struct ProductView: View {
                     
                     HStack{
                         VStack {
-                            Text("Selected Size: \(selectedSize)")
+                            Text("Selected Size: \(viewModel.selectedSize)")
                                 .padding()
                                 .multilineTextAlignment(.leading)
                         }
                         Spacer()
                         VStack{
 
-                            Picker("Size", selection: $selectedSize) {
+                            Picker("Size", selection: $viewModel.selectedSize) {
                                 ForEach(sizes, id: \.self) { size in
                                     Text(size).tag(size)
                                 }
@@ -122,21 +122,11 @@ struct ProductView: View {
                     .padding(.horizontal, 10)
                     
                     HStack {
+                       
                         Button(action: {
-                            // Action for back button
+                            viewModel.addToCart(product: product)
                         }) {
-                            Text("Back")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.gray.opacity(0.5))
-                                .foregroundColor(Color("Primary"))
-                                .cornerRadius(10)
-                        }
-                        
-                        Button(action: {
-                            // Action for checkout button
-                        }) {
-                            Text("Pay")
+                            Text("Add to Cart")
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color("Primary"))

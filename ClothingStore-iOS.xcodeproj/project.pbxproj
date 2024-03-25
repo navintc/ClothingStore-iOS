@@ -12,6 +12,11 @@
 		8D52E4362BAB4D3F001AF380 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4352BAB4D3F001AF380 /* PaymentView.swift */; };
 		8D52E4382BABEB0C001AF380 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4372BABEB0B001AF380 /* ProfileView.swift */; };
 		8D52E43A2BACD4A1001AF380 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4392BACD4A1001AF380 /* ProductView.swift */; };
+		8D52E4742BB20034001AF380 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4722BB20034001AF380 /* Model.xcdatamodeld */; };
+		8D52E4772BB2012A001AF380 /* ClothModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4762BB2012A001AF380 /* ClothModel.swift */; };
+		8D52E4792BB20153001AF380 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4782BB20153001AF380 /* HomeViewModel.swift */; };
+		8D52E47B2BB201EB001AF380 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E47A2BB201EB001AF380 /* SearchViewModel.swift */; };
+		8D52E47D2BB204FF001AF380 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E47C2BB204FF001AF380 /* ProductViewModel.swift */; };
 		8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */; };
 		8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F2A2BA746C7004752C8 /* ContentView.swift */; };
 		8D559F2D2BA746C9004752C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D559F2C2BA746C9004752C8 /* Assets.xcassets */; };
@@ -51,6 +56,11 @@
 		8D52E4352BAB4D3F001AF380 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		8D52E4372BABEB0B001AF380 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		8D52E4392BACD4A1001AF380 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		8D52E4732BB20034001AF380 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		8D52E4762BB2012A001AF380 /* ClothModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothModel.swift; sourceTree = "<group>"; };
+		8D52E4782BB20153001AF380 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8D52E47A2BB201EB001AF380 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		8D52E47C2BB204FF001AF380 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		8D559F252BA746C7004752C8 /* ClothingStore-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ClothingStore-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSApp.swift; sourceTree = "<group>"; };
 		8D559F2A2BA746C7004752C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +105,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D52E4712BB20034001AF380 /* LocalDB */ = {
+			isa = PBXGroup;
+			children = (
+				8D52E4722BB20034001AF380 /* Model.xcdatamodeld */,
+			);
+			path = LocalDB;
+			sourceTree = "<group>";
+		};
+		8D52E4752BB200A2001AF380 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8D52E47A2BB201EB001AF380 /* SearchViewModel.swift */,
+				8D52E4782BB20153001AF380 /* HomeViewModel.swift */,
+				8D52E47C2BB204FF001AF380 /* ProductViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		8D559F1C2BA746C7004752C8 = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +146,10 @@
 		8D559F272BA746C7004752C8 /* ClothingStore-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8D52E4752BB200A2001AF380 /* ViewModels */,
+				8D52E4712BB20034001AF380 /* LocalDB */,
 				8D559F552BA75087004752C8 /* Helpers */,
 				8D559F542BA7507A004752C8 /* Models */,
-				8D559F532BA75070004752C8 /* Controllers */,
 				8D559F522BA75063004752C8 /* Views */,
 				8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */,
 				8D559F2A2BA746C7004752C8 /* ContentView.swift */,
@@ -170,16 +199,10 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8D559F532BA75070004752C8 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		8D559F542BA7507A004752C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D52E4762BB2012A001AF380 /* ClothModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -348,7 +371,11 @@
 			files = (
 				8D559F5E2BA8B3DD004752C8 /* SearchView.swift in Sources */,
 				8D52E4362BAB4D3F001AF380 /* PaymentView.swift in Sources */,
+				8D52E47D2BB204FF001AF380 /* ProductViewModel.swift in Sources */,
 				8D559F6B2BAAA8DD004752C8 /* Theme.swift in Sources */,
+				8D52E4792BB20153001AF380 /* HomeViewModel.swift in Sources */,
+				8D52E4772BB2012A001AF380 /* ClothModel.swift in Sources */,
+				8D52E4742BB20034001AF380 /* Model.xcdatamodeld in Sources */,
 				8D52E4342BAB3180001AF380 /* SigninView.swift in Sources */,
 				8D52E4382BABEB0C001AF380 /* ProfileView.swift in Sources */,
 				8D52E43A2BACD4A1001AF380 /* ProductView.swift in Sources */,
@@ -357,6 +384,7 @@
 				8D559F5C2BA774B6004752C8 /* SearchbarView.swift in Sources */,
 				8D559F572BA750BA004752C8 /* HomeView.swift in Sources */,
 				8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */,
+				8D52E47B2BB201EB001AF380 /* SearchViewModel.swift in Sources */,
 				8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */,
 				8D559F642BA8B8F5004752C8 /* CatagoriesView.swift in Sources */,
 			);
@@ -701,6 +729,19 @@
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8D52E4722BB20034001AF380 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8D52E4732BB20034001AF380 /* Model.xcdatamodel */,
+			);
+			currentVersion = 8D52E4732BB20034001AF380 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8D559F1D2BA746C7004752C8 /* Project object */;
 }
