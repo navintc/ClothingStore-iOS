@@ -8,6 +8,6 @@
 import SwiftUI
 
 //COLOR
-let BrandPrimary: Color = Color("Primary")
+let BrandPrimary: Color = Color("BrandPrimary")
 let AlertColor: Color = Color("Alert")
 let BackgroundAccent: Color = Color("BackgroundAccent")

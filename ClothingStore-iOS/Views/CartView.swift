@@ -26,46 +26,51 @@ struct CartView: View {
         CartItem(name: "Product 3", category: "Category B", price: 15.99, quantity: 1, imageName: "product3"),
         CartItem(name: "Product 4", category: "Category C", price: 24.99, quantity: 3, imageName: "product4")
     ]
+    
+    @ViewBuilder
+    private func CartItemView(item: CartItem) -> some View {
+        HStack {
+            KFImage.url(URL(string:"https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .cornerRadius(8)
+            
+            VStack(alignment: .leading) {
+                Text(item.name)
+                    .font(.headline)
+                Text("\(item.quantity) x $\(item.price, specifier: "%.2f")")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text(item.category)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            .padding(10)
+            
+            Spacer()
+            
+            Button(action: {
+                // Action for trash button
+            }) {
+                Image(systemName: "trash")
+                    .foregroundColor(AlertColor)
+            }
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(10)
+    }
+
+
 
     var body: some View {
        
         VStack {
-            //scroll content
             ScrollView {
-                //Item Grid
                 ScrollView {
                     ForEach(cartItems) { item in
-                        HStack {
-                            KFImage.url(URL(string:"https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 80, height: 80)
-                                .cornerRadius(8)
-                            
-                            VStack(alignment: .leading) {
-                                Text(item.name)
-                                    .font(.headline)
-                                Text("\(item.quantity) x $\(item.price, specifier: "%.2f")")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                Text(item.category)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(10)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                // Action for trash button
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(Alert)
-                            }
-                        }
-                        .padding()
-                        .background(Color(UIColor.systemBackground))
-                        .cornerRadius(10)
+                        CartItemView(item: item)
                     }
                     Spacer()
                 }
@@ -74,11 +79,6 @@ struct CartView: View {
                 Spacer()
             }
             .background(Color.gray.opacity(0.1).ignoresSafeArea())
-            
-            
-            
-                 
-            
             VStack{
                 HStack {
                     Text("Total:")
@@ -115,7 +115,6 @@ struct CartView: View {
                 .padding()
             }
             .padding()
-
         }
         .navigationTitle("Cart")
     }
