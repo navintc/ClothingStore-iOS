@@ -13,7 +13,7 @@ struct SearchView: View {
     @State private var sortOption: SearchViewModel.SortOption?
     
     var body: some View {
-        NavigationView {
+        
             VStack {
                 SearchbarView(searchText: $viewModel.searchText, onSearch: viewModel.searchCloths)
                 
@@ -71,7 +71,7 @@ struct SearchView: View {
                     .padding()
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
-            }
+            
             .navigationTitle("Cart")
         }
     }
