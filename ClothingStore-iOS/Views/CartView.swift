@@ -8,43 +8,34 @@
 import SwiftUI
 import Kingfisher
 
-struct CartItem: Identifiable {
-    var id = UUID()
-    var name: String
-    var category: String
-    var price: Double
-    var quantity: Int
-    var imageName: String // Image name for demonstration purposes
-}
 
 struct CartView: View {
-    
+    @State private var cartItems = GlobalVariables.globalCart
     @State private var isSidebarShowing = false
-    let cartItems: [CartItem] = [
-        CartItem(name: "Product 1", category: "Category A", price: 10.99, quantity: 1, imageName: "product1"),
-        CartItem(name: "Product 2", category: "Category A", price: 19.99, quantity: 2, imageName: "product2"),
-        CartItem(name: "Product 3", category: "Category B", price: 15.99, quantity: 1, imageName: "product3"),
-        CartItem(name: "Product 4", category: "Category C", price: 24.99, quantity: 3, imageName: "product4")
-    ]
     
     @ViewBuilder
-    private func CartItemView(item: CartItem) -> some View {
+    private func CartItemView(listItem: CartElement) -> some View {
         HStack {
-            KFImage.url(URL(string:"https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
+            KFImage.url(URL(string:listItem.item.imageurl))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 80, height: 80)
                 .cornerRadius(8)
             
             VStack(alignment: .leading) {
-                Text(item.name)
+                Text(listItem.item.name)
                     .font(.headline)
-                Text("\(item.quantity) x $\(item.price, specifier: "%.2f")")
+                Text("$\(listItem.item.price, specifier: "%.2f")")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                Text(item.category)
-                    .font(.caption)
-                    .foregroundColor(.gray)
+                HStack{
+                    Text(listItem.item.category)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Text(listItem.size)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
             }
             .padding(10)
             
@@ -52,6 +43,8 @@ struct CartView: View {
             
             Button(action: {
                 // Action for trash button
+                GlobalVariables.deleteItem(withId: listItem.id)
+                cartItems = GlobalVariables.globalCart
             }) {
                 Image(systemName: "trash")
                     .foregroundColor(AlertColor)
@@ -67,18 +60,23 @@ struct CartView: View {
     var body: some View {
        
         VStack {
-            ScrollView {
+            if cartItems.isEmpty {
+                Spacer()
+                Text("Your cart is empty. Search and add items to cart!")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Spacer()
+            } else {
                 ScrollView {
                     ForEach(cartItems) { item in
-                        CartItemView(item: item)
+                        CartItemView(listItem: item)
                     }
                     Spacer()
                 }
-
-                .padding()
-                Spacer()
+                .background(Color.gray.opacity(0.1).ignoresSafeArea())
             }
-            .background(Color.gray.opacity(0.1).ignoresSafeArea())
             VStack{
                 HStack {
                     Text("Total:")
@@ -90,17 +88,7 @@ struct CartView: View {
                 .padding()
                 
                 HStack {
-                    Button(action: {
-                                    // Action for back button
-                    }) {
-                        Text("Back")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.gray.opacity(0.5))
-                            .foregroundColor(BrandPrimary)
-                            .cornerRadius(10)
-                    }
-                    
+               
                     Button(action: {
                         // Action for checkout button
                     }) {

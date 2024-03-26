@@ -11,7 +11,11 @@ class ProductViewModel: ObservableObject {
     @Published var selectedSize = "M"
     
     func addToCart(product: Cloth) {
-        // Add logic here to add the product to the cart
-        print("Added product to cart: \(product.name), Size: \(selectedSize)")
+        GlobalVariables.globalCart.append(CartElement(item: product, size: selectedSize))
+        
+        print("DEBUG: Current cart list --")
+        for item in GlobalVariables.globalCart {
+            print(item.item.name)
+        }
     }
 }
