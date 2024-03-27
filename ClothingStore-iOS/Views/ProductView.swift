@@ -26,12 +26,14 @@ extension Color {
 }
 
 struct ProductView: View {
-    @State private var isSidebarShowing = false
-    let sizes = ["XS", "S", "M", "L", "XL", "XXL"]
-    @ObservedObject var viewModel = ProductViewModel()
     
-    var product: Cloth
+    @ObservedObject var viewModel = ProductViewModel()
+
     @State private var products: [Cloth] = []
+    @State private var isSidebarShowing = false
+    
+    let sizes = ["XS", "S", "M", "L", "XL", "XXL"]
+    var product: Cloth
     
     var body: some View {
         NavigationView {
@@ -142,6 +144,9 @@ struct ProductView: View {
                 
             }
          
+        }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("Product Added"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }
         
         

@@ -10,6 +10,7 @@ import Kingfisher
 
 
 struct CartView: View {
+    @ObservedObject var viewModel = CartViewModel()
     @State private var cartItems = GlobalVariables.globalCart
     @State private var isSidebarShowing = false
     
@@ -82,7 +83,7 @@ struct CartView: View {
                     Text("Total:")
                         .font(.headline)
                     Spacer()
-                    Text("$53795")
+                    Text("$\(viewModel.totalCartPrice(), specifier: "%.2f")")
                         .font(.headline)
                 }
                 .padding()

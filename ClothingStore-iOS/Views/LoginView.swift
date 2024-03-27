@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var viewModel: LoginViewModel
     
     @State private var isSidebarShowing = false
-    @State private var email = ""
-    @State private var password = ""
     
     var body: some View {
         NavigationView {
@@ -25,13 +24,16 @@ struct LoginView: View {
                 }
                 
                 VStack {
-                    TextField("Email", text: $email)
+                    TextField("Email", text: $viewModel.email)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
+                        .disableAutocorrection(true)
                     
-                    SecureField("Password", text: $password)
+                    SecureField("Password", text: $viewModel.password)
                         .padding(.vertical, 10)
                         .padding(.horizontal)
                         .background(Color.gray.opacity(0.2))
@@ -107,9 +109,4 @@ struct LoginView: View {
             
         }
     }
-}
-
-
-#Preview {
-    LoginView()
 }
