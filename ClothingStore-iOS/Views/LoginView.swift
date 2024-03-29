@@ -103,26 +103,6 @@ struct LoginView: View {
                 }
             }
             .navigationBarTitle("NAV ANDRS")
-            .navigationBarItems(
-                leading: Spacer(),
-                trailing:
-                    HStack {
-                        Button(action: {
-                            // Action for right icon 1
-                        }) {
-                            Image(systemName: "cart.fill")
-                                .foregroundColor(BrandPrimary)
-                        }
-                        
-                        Button(action: {
-                            // Action for right icon 2
-                            isSidebarShowing.toggle()
-                        }) {
-                            Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(BrandPrimary)
-                        }
-                    }
-            )
             .sheet(isPresented: $isSidebarShowing) {
                 // sidebar content
                 CatagoriesView()

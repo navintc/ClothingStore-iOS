@@ -13,6 +13,7 @@ struct CartView: View {
     @ObservedObject var viewModel = CartViewModel()
     @State private var cartItems = GlobalVariables.globalCart
     @State private var isSidebarShowing = false
+    @State var isActive : Bool = false
     
     @ViewBuilder
     private func CartItemView(listItem: CartElement) -> some View {
@@ -89,10 +90,7 @@ struct CartView: View {
                 .padding()
                 
                 HStack {
-               
-                    Button(action: {
-                        // Action for checkout button
-                    }) {
+                    NavigationLink(destination: PaymentView(rootIsActive: self.$isActive), isActive: self.$isActive) {
                         Text("Checkout")
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -100,11 +98,13 @@ struct CartView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                    .isDetailLink(false)
                 }
                 .padding()
             }
             .padding()
         }
+        
         .navigationTitle("Cart")
     }
 }

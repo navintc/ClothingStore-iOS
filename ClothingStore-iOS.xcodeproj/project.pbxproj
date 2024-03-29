@@ -25,6 +25,7 @@
 		8D52E4AF2BB5F12B001AF380 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4AE2BB5F12B001AF380 /* Authenticator.swift */; };
 		8D52E4B12BB680D5001AF380 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4B02BB680D5001AF380 /* User.swift */; };
 		8D52E4BB2BB6E121001AF380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4BA2BB6E120001AF380 /* AppDelegate.swift */; };
+		8D52E4BF2BB7100B001AF380 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4BE2BB7100B001AF380 /* PaymentSuccessView.swift */; };
 		8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */; };
 		8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F2A2BA746C7004752C8 /* ContentView.swift */; };
 		8D559F2D2BA746C9004752C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D559F2C2BA746C9004752C8 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		8D52E4AE2BB5F12B001AF380 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		8D52E4B02BB680D5001AF380 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8D52E4BA2BB6E120001AF380 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8D52E4BE2BB7100B001AF380 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
 		8D559F252BA746C7004752C8 /* ClothingStore-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ClothingStore-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSApp.swift; sourceTree = "<group>"; };
 		8D559F2A2BA746C7004752C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				8D52E4352BAB4D3F001AF380 /* PaymentView.swift */,
 				8D52E4372BABEB0B001AF380 /* ProfileView.swift */,
 				8D52E4392BACD4A1001AF380 /* ProductView.swift */,
+				8D52E4BE2BB7100B001AF380 /* PaymentSuccessView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				8D52E4792BB20153001AF380 /* HomeViewModel.swift in Sources */,
 				8D52E4772BB2012A001AF380 /* ClothModel.swift in Sources */,
 				8D52E4342BAB3180001AF380 /* SigninView.swift in Sources */,
+				8D52E4BF2BB7100B001AF380 /* PaymentSuccessView.swift in Sources */,
 				8D52E4382BABEB0C001AF380 /* ProfileView.swift in Sources */,
 				8D52E43A2BACD4A1001AF380 /* ProductView.swift in Sources */,
 				8D559F662BA8E1AE004752C8 /* CartView.swift in Sources */,
@@ -584,6 +588,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ClothingStore-iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "FaceID will be used to authenticate your payments in NAV ANDRS";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -612,6 +617,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ClothingStore-iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "FaceID will be used to authenticate your payments in NAV ANDRS";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

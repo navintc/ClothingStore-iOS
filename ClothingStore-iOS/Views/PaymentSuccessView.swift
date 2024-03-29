@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct PaymentSuccess: View {
+struct PaymentSuccessView: View {
+    @Binding var shouldPopToRootView : Bool
     var body: some View {
         VStack{
+            
             Spacer()
             VStack{
                 Image(systemName: "checkmark.circle.fill")
@@ -26,6 +28,7 @@ struct PaymentSuccess: View {
             Spacer()
             Button(action: {
                 // Action for checkout button
+                self.shouldPopToRootView = false
                
             }) {
                 Text("Continue")
@@ -40,8 +43,4 @@ struct PaymentSuccess: View {
         .padding()
         .navigationTitle("Payment")
     }
-}
-
-#Preview {
-    PaymentSuccess()
 }
