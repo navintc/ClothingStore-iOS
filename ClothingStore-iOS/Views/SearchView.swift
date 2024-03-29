@@ -7,11 +7,12 @@
 
 import SwiftUI
 import Kingfisher
+import UIKit
 
 struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
     @State private var sortOption: SearchViewModel.SortOption?
-    
+
     var body: some View {
         
             VStack {
@@ -25,7 +26,7 @@ struct SearchView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .alignmentGuide(.leading) { _ in 0 }
                             Spacer()
-                            
+                           
                             Menu {
                                 ForEach(SearchViewModel.SortOption.allCases, id: \.self) { option in
                                     Button(option.rawValue) {
@@ -71,13 +72,12 @@ struct SearchView: View {
                     .padding()
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
-            
             .navigationTitle("Cart")
+            
+                
         }
     }
 }
-
-
 
 #Preview {
     SearchView()

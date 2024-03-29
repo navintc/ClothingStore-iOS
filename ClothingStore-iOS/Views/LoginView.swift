@@ -16,6 +16,8 @@ struct LoginView: View {
     @ObservedObject var authObj: Authenticator
     @Binding var isAuthenticated: Bool
     
+    @State private var user: User = User.empty
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -53,6 +55,7 @@ struct LoginView: View {
                                     print("Obtained credentials: \(credentials)")
                                     authObj.isAuthenticated = true
                                     isAuthenticated = true // Update the binding
+                                    self.user = User.from(credentials.idToken)
                                     print("DEBUG: from loginbtn -\(authObj.isAuthenticated)")
                                     
                                 case .failure(let error):

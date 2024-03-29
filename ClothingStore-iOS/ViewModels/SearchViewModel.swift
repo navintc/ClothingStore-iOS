@@ -7,12 +7,22 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 
 class SearchViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var resultedQuery = ""
     @Published var searchResults: [Cloth] = []
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceShaken), name: NSNotification.Name("DeviceShaken"), object: nil)
+    }
+
+    @objc func deviceShaken() {
+        resetFilters()
+        print("DEBUG: Device shaken")
+    }
     
     func searchCloths(query: String) {
         guard let url = URL(string: "http://localhost:3000/api/cloths/search?query=\(query)") else {
@@ -61,6 +71,9 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
-
+    
+    func resetFilters() {
+        searchResults.sort(by: SortOption.reset.sortDescriptor)
+    }
 }
 

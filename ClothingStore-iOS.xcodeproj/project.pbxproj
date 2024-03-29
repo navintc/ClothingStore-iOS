@@ -23,6 +23,8 @@
 		8D52E4AB2BB5DD49001AF380 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 8D52E4AA2BB5DD49001AF380 /* Auth0 */; };
 		8D52E4AD2BB5EB69001AF380 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D52E4AC2BB5EB69001AF380 /* Auth0.plist */; };
 		8D52E4AF2BB5F12B001AF380 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4AE2BB5F12B001AF380 /* Authenticator.swift */; };
+		8D52E4B12BB680D5001AF380 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4B02BB680D5001AF380 /* User.swift */; };
+		8D52E4BB2BB6E121001AF380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D52E4BA2BB6E120001AF380 /* AppDelegate.swift */; };
 		8D559F292BA746C7004752C8 /* ClothingStore_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */; };
 		8D559F2B2BA746C7004752C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D559F2A2BA746C7004752C8 /* ContentView.swift */; };
 		8D559F2D2BA746C9004752C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D559F2C2BA746C9004752C8 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		8D52E4A52BB4CCB1001AF380 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8D52E4AC2BB5EB69001AF380 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		8D52E4AE2BB5F12B001AF380 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		8D52E4B02BB680D5001AF380 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8D52E4BA2BB6E120001AF380 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D559F252BA746C7004752C8 /* ClothingStore-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ClothingStore-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559F282BA746C7004752C8 /* ClothingStore_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingStore_iOSApp.swift; sourceTree = "<group>"; };
 		8D559F2A2BA746C7004752C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				8D559F2C2BA746C9004752C8 /* Assets.xcassets */,
 				8D559F2E2BA746C9004752C8 /* Preview Content */,
 				8D52E4AC2BB5EB69001AF380 /* Auth0.plist */,
+				8D52E4BA2BB6E120001AF380 /* AppDelegate.swift */,
 			);
 			path = "ClothingStore-iOS";
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				8D559F602BA8B8B5004752C8 /* ViewComponents */,
 				8D52E4A12BB3393E001AF380 /* CartMemory.swift */,
 				8D52E4AE2BB5F12B001AF380 /* Authenticator.swift */,
+				8D52E4B02BB680D5001AF380 /* User.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D52E4BB2BB6E121001AF380 /* AppDelegate.swift in Sources */,
 				8D559F5E2BA8B3DD004752C8 /* SearchView.swift in Sources */,
 				8D52E4362BAB4D3F001AF380 /* PaymentView.swift in Sources */,
 				8D52E4AF2BB5F12B001AF380 /* Authenticator.swift in Sources */,
@@ -411,6 +418,7 @@
 				8D52E4A22BB3393E001AF380 /* CartMemory.swift in Sources */,
 				8D559F642BA8B8F5004752C8 /* CatagoriesView.swift in Sources */,
 				8D52E4A62BB4CCB1001AF380 /* LoginViewModel.swift in Sources */,
+				8D52E4B12BB680D5001AF380 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

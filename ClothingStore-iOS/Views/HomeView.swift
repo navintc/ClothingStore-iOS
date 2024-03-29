@@ -14,7 +14,9 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
+            
             VStack {
+        
                 Spacer()
                 
                 ScrollView {
@@ -88,9 +90,4 @@ struct HomeView: View {
             }
         }
     }
-}
-
-
-#Preview {
-    HomeView()
 }
