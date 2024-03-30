@@ -9,7 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct CatagoriesView: View {
-    let onDismiss: () -> Void
+    let onCategorySelect: (String) -> Void
+    @Binding var selectedCategory: String?
 
     var body: some View {
         VStack{
@@ -40,6 +41,9 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("Dress") // Call the dismiss function, which will now trigger navigation
+                        }
                         
                         VStack {
                             KFImage.url(URL(string: "https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1502958_alternate10?$plpDeskRF$"))
@@ -54,6 +58,9 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("tshirt") // Call the dismiss function, which will now trigger navigation
+                        }
                         
                         VStack {
                             KFImage.url(URL(string: "https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1474895_alternate10?$plpDeskRFAlt$"))
@@ -68,6 +75,9 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("Shirt") // Call the dismiss function, which will now trigger navigation
+                        }
                         
                         
                         VStack {
@@ -83,6 +93,9 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("Pant") // Call the dismiss function, which will now trigger navigation
+                        }
                         
                         VStack {
                             KFImage.url(URL(string: "https://images.unsplash.com/photo-1595137976825-b906534240a5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2hvcnRzfGVufDB8fDB8fHww"))
@@ -97,6 +110,9 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("Short") // Call the dismiss function, which will now trigger navigation
+                        }
                         
                         VStack {
                             KFImage.url(URL(string: "https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1501060_alternate5?$plpDeskRF$"))
@@ -111,29 +127,15 @@ struct CatagoriesView: View {
                         }
                         .padding()
                         .cornerRadius(10)
+                        .onTapGesture {
+                            onCategorySelect("Misc") // Call the dismiss function, which will now trigger navigation
+                        }
                     }
                     
                 }
             }
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-            HStack {
-                Spacer()
-                Button(action: {
-                    // Action for right icon 1
-                    self.onDismiss()
-                    
-                }) {
-                    Image(systemName: "person.fill")
-                }
-                
-                Button(action: {
-                    // Action for right icon 2
-                    
-                }) {
-                    Image(systemName: "gear")
-                }
-                .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 40))
-            }
+      
         }
         
     }

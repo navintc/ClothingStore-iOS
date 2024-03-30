@@ -145,6 +145,7 @@ struct ProductView: View {
             }
          
         }
+        .navigationViewStyle(.stack)
         .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text("Product Added"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
         }

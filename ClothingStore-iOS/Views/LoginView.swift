@@ -15,6 +15,7 @@ struct LoginView: View {
         NavigationView {
             VStack {
                 Spacer()
+                
                 HStack{
                     Text("Log in")
                         .font(.title)
@@ -52,16 +53,14 @@ struct LoginView: View {
                         Text("Still dont have an account?")
                             .font(.caption)
                         
-                        Button(action: {
-                            // Action for checkout button
-                        }) {
-                            Text("Sign in")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.gray.opacity(0.5))
-                                .foregroundColor(BrandPrimary)
-                                .cornerRadius(10)
-                        }
+                        NavigationLink(destination: SigninView()) {
+                                Text("Sign in")
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.5))
+                                    .foregroundColor(BrandPrimary)
+                                    .cornerRadius(10)
+                            }
                     }.padding(.vertical, 50)
                 }
                 .padding()
@@ -81,8 +80,12 @@ struct LoginView: View {
                 }
             }
             .navigationBarTitle("NAV ANDRS")
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(title: Text("Login Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+            }
         
         }
+        .navigationViewStyle(.stack)
     }
 }
 

@@ -23,12 +23,14 @@ struct PaymentView: View {
     @State private var paymentSuccess = false
     
     @Binding var rootIsActive : Bool
+    
+    @ObservedObject var updateTrigger = CartUpdateTrigger()
 
     
     var body: some View {
         
         VStack {
-            NavigationLink(destination: PaymentSuccessView(shouldPopToRootView: self.$rootIsActive), isActive: $paymentSuccess) {
+            NavigationLink(destination: PaymentSuccessView(shouldPopToRootView: self.$rootIsActive, updateTrigger: updateTrigger), isActive: $paymentSuccess) {
                 EmptyView()
             }
             .isDetailLink(false)

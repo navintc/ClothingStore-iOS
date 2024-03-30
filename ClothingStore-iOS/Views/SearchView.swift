@@ -12,6 +12,7 @@ import UIKit
 struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
     @State private var sortOption: SearchViewModel.SortOption?
+    
 
     var body: some View {
         

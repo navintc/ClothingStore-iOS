@@ -15,6 +15,8 @@ struct CartView: View {
     @State private var isSidebarShowing = false
     @State var isActive : Bool = false
     
+    @ObservedObject var updateTrigger = CartUpdateTrigger()
+    
     @ViewBuilder
     private func CartItemView(listItem: CartElement) -> some View {
         HStack {
@@ -106,6 +108,13 @@ struct CartView: View {
         }
         
         .navigationTitle("Cart")
+        .onChange(of: updateTrigger.shouldClearCart) { _ in
+            cartItems = []
+            GlobalVariables.globalCart.removeAll() // Ensure the global cart is also cleared
+        }
+        .onAppear {
+            cartItems = GlobalVariables.globalCart
+        }
     }
 }
 

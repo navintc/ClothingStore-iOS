@@ -12,12 +12,16 @@ struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @State private var isSidebarShowing = false
     @State private var navigateToProfile = false
+    
+    @State private var selectedCategory: String?
+    @State private var navigateToCatSearch = false
+
 
     var body: some View {
         NavigationView {
             
             VStack {
-             
+                
                 Spacer()
                 
                 ScrollView {
@@ -30,7 +34,7 @@ struct HomeView: View {
                             .alignmentGuide(.leading) { _ in 0 }
                     }
                     .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-
+                    
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
                         ForEach(viewModel.cloths) { product in
                             NavigationLink(destination: ProductView(product: product)) {
@@ -59,7 +63,7 @@ struct HomeView: View {
                     .padding()
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
-                NavigationLink(destination: ProfileView(), isActive: $navigateToProfile) { EmptyView() }
+                NavigationLink(destination: CatSearchView(category: selectedCategory), isActive: $navigateToCatSearch) { EmptyView() }
 
             }
             .navigationBarTitle("NAV ANDRS")
@@ -83,19 +87,32 @@ struct HomeView: View {
                             Image(systemName: "circle.grid.3x3.fill")
                                 .foregroundColor(BrandPrimary)
                         }
+                        
+                        NavigationLink(destination: ProfileView()) {
+                            Image(systemName: "person.fill")
+                                .foregroundColor(BrandPrimary)
+                        }
                     }
             )
+            
             .onAppear {
                 viewModel.loadData()
             }
-//            .sheet(isPresented: $isSidebarShowing) {
-//                CatagoriesView()
-//            }
             .sheet(isPresented: $isSidebarShowing) {
-                CatagoriesView(onDismiss: {
-                    self.isSidebarShowing = false
-                    self.navigateToProfile = true // Trigger navigation to ProfileView
-                })
+                CatagoriesView(
+                    onCategorySelect: { category in
+                        self.selectedCategory = category
+                        self.navigateToCatSearch = true // This will trigger the navigation to CatSearchView
+                        self.isSidebarShowing = false // Dismiss the sheet
+                    },
+                    selectedCategory: $selectedCategory
+                )
+            }
+        }
+        .navigationViewStyle(.stack)
+        .onChange(of: selectedCategory) { newValue in
+            if let category = newValue {
+                navigateToCatSearch = true // Trigger navigation to CatSearchView when a category is selected
             }
         }
     }

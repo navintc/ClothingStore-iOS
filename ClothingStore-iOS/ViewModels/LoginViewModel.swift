@@ -12,6 +12,9 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     
+    @Published var showingAlert = false
+    @Published var alertMessage = ""
+    
     func login() {
         print("DEBUG: \(email) , \(password)")
         guard let url = URL(string: "http://localhost:3000/api/login") else {
@@ -49,6 +52,8 @@ class LoginViewModel: ObservableObject {
                 print("DEBUG: Invalid credentials")
                 DispatchQueue.main.async {
                     Authenticator.shared.isAuthenticated = false
+                    self.showingAlert = true // Trigger the alert
+                    self.alertMessage = "Invalid credentials. Try again."
                 }
             }
         }.resume()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PaymentSuccessView: View {
     @Binding var shouldPopToRootView : Bool
+    @ObservedObject var updateTrigger: CartUpdateTrigger
     var body: some View {
         VStack{
             
@@ -28,8 +29,10 @@ struct PaymentSuccessView: View {
             Spacer()
             Button(action: {
                 // Action for checkout button
+                GlobalVariables.globalCart.removeAll()
+                updateTrigger.shouldClearCart = true
                 self.shouldPopToRootView = false
-               
+                
             }) {
                 Text("Continue")
                     .frame(maxWidth: .infinity)
