@@ -11,12 +11,13 @@ import Kingfisher
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @State private var isSidebarShowing = false
+    @State private var navigateToProfile = false
 
     var body: some View {
         NavigationView {
             
             VStack {
-        
+             
                 Spacer()
                 
                 ScrollView {
@@ -58,6 +59,8 @@ struct HomeView: View {
                     .padding()
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
+                NavigationLink(destination: ProfileView(), isActive: $navigateToProfile) { EmptyView() }
+
             }
             .navigationBarTitle("NAV ANDRS")
             .navigationBarItems(
@@ -85,8 +88,14 @@ struct HomeView: View {
             .onAppear {
                 viewModel.loadData()
             }
+//            .sheet(isPresented: $isSidebarShowing) {
+//                CatagoriesView()
+//            }
             .sheet(isPresented: $isSidebarShowing) {
-                CatagoriesView()
+                CatagoriesView(onDismiss: {
+                    self.isSidebarShowing = false
+                    self.navigateToProfile = true // Trigger navigation to ProfileView
+                })
             }
         }
     }

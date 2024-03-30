@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isAuthenticated = false
+    @ObservedObject private var authenticator = Authenticator.shared
 
     var body: some View {
-        if isAuthenticated {
+        if authenticator.isAuthenticated {
             HomeView()
         } else {
-            LoginView(authObj: Authenticator.shared, isAuthenticated: $isAuthenticated)
+            LoginView()
         }
     }
 }

@@ -88,10 +88,6 @@ struct PaymentView: View {
             
         }
         .navigationTitle("Payment Details")
-        .sheet(isPresented: $isSidebarShowing) {
-            // sidebar content
-            CatagoriesView()
-        }
     }
     
     func authenticateUser(completion: @escaping (Bool, Error?) -> Void) {

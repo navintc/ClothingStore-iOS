@@ -6,22 +6,14 @@
 //
 
 import Foundation
-import JWTDecode
-
 
 class Authenticator: ObservableObject {
     @Published var isAuthenticated: Bool = false
     static let shared = Authenticator()
-
-    private init() {}
-
-    func login() {
-        // Perform login logic here
-        isAuthenticated = true
-    }
-
-    func logout() {
-        // Perform logout logic here
-        isAuthenticated = false
-    }
+    
+    static var id: Int?
+    static var name: String?
+    static var email: String?
+    static var age: Int?
+    static var gender: String?
 }

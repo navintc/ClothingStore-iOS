@@ -9,95 +9,84 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var isSidebarShowing = false
-    @State private var name = ""
-    @State private var email = ""
+    // Initialize @State properties with values from Authenticator
+    @State private var name = Authenticator.name ?? ""
+    @State private var email = Authenticator.email ?? ""
     @State private var password = ""
+    @State private var age = "\(Authenticator.age ?? 0)"
+    @State private var gender = Authenticator.gender ?? ""
+    
+    @State private var newpasswd = ""
+    @State private var newpasswd2 = ""
     
     
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                
-                Spacer()
-                
-                //scroll content
-                
-                //Item Grid
-                
-                Form {
-                    Section(header: Text("Personal Information")) {
-                        TextField("Name", text: $name)
-                        TextField("Email", text: $email)
-                    }
-                    
-                    Section(header: Text("Shipping Details")) {
-                        TextField("Name", text: $password)
-                        TextField("Address 1", text: $password)
-                        TextField("Address 2", text: $password)
-                        TextField("City", text: $password)
-                        TextField("Country", text: $password)
-                    }
+        VStack {
+            Form {
+                Section(header: Text("Personal Information")) {
+                    TextField("Name", text: $name)
+                    TextField("Age", text: $age)
+                    TextField("Gender", text: $gender)
+                    TextField("Email", text: $email)
                 }
-                
-                HStack {
-                    Button(action: {
-                        // Action for back button
-                    }) {
-                        Text("Back")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.gray.opacity(0.5))
-                            .foregroundColor(BrandPrimary)
-                            .cornerRadius(10)
-                    }
-                    
-                    Button(action: {
-                        // Action for checkout button
-                    }) {
-                        Text("Pay")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(BrandPrimary)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
+                Section(header: Text("Password")) {
+                    TextField("New Password", text: $newpasswd)
+                    TextField("Enter New Password again", text: $newpasswd2)
                 }
-                .padding()
-                
-                
-                
-            }
-            .navigationBarTitle("NAV ANDRS")
-            .navigationBarItems(
-                leading: Spacer(),
-                trailing:
-                    HStack {
-                        Button(action: {
-                            // Action for right icon 1
-                        }) {
-                            Image(systemName: "cart.fill")
-                                .foregroundColor(BrandPrimary)
-                        }
-                        
-                        Button(action: {
-                            // Action for right icon 2
-                            isSidebarShowing.toggle()
-                        }) {
-                            Image(systemName: "circle.grid.3x3.fill")
-                                .foregroundColor(BrandPrimary)
-                        }
-                    }
-            )
-            .sheet(isPresented: $isSidebarShowing) {
-                // sidebar content
-                CatagoriesView()
             }
             
-            
+            HStack {
+                
+                
+                Button(action: {
+                    // Action for checkout button
+                    updateProfile()
+                }) {
+                    Text("Update")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(BrandPrimary)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .navigationTitle("Profile")
+            .padding()
         }
+    }
+    
+    func updateProfile() {
+        guard let url = URL(string: "http://localhost:3000/api/users/\(Authenticator.id ?? 0)") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         
+        if (newpasswd == newpasswd2){
+            let updatedUser = UserUpdate(name: name, email: email, age: Int(age) ?? 0, gender: gender, passwd: newpasswd2)
+            guard let jsonData = try? JSONEncoder().encode(updatedUser) else { return }
+            
+            request.httpBody = jsonData
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let data = data {
+                    // Handle the successful response, updating Authenticator as necessary
+                    DispatchQueue.main.async {
+                        // Assuming the response includes updated user information
+                        if let userResponse = try? JSONDecoder().decode(User.self, from: data) {
+                            // Update Authenticator with the new data
+                            Authenticator.name = userResponse.name
+                            Authenticator.email = userResponse.email
+                            Authenticator.age = userResponse.age
+                            Authenticator.gender = userResponse.gender
+                            // Handle password separately as it might not be returned in response
+                        }
+                    }
+                } else {
+                    print("Failed to update profile: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }.resume()
+        }
     }
 }
 

@@ -105,10 +105,6 @@ struct SigninView: View {
                         }
                     }
             )
-            .sheet(isPresented: $isSidebarShowing) {
-                // sidebar content
-                CatagoriesView()
-            }
             
         }
     }
