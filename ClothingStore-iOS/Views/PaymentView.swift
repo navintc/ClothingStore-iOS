@@ -150,6 +150,7 @@ struct PaymentView: View {
                     if httpResponse.statusCode == 200 {
                         print("Payment successful")
                         // Clear the global cart here
+                        print(httpBody)
                         GlobalVariables.globalCart.removeAll()
                     } else {
                         print("Unexpected status code: \(httpResponse.statusCode)")

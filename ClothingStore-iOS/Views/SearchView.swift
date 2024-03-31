@@ -73,7 +73,7 @@ struct SearchView: View {
                     .padding()
                 }
                 .background(Color.gray.opacity(0.1).ignoresSafeArea())
-            .navigationTitle("Cart")
+            .navigationTitle("Search")
             
                 
         }

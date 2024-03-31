@@ -15,13 +15,35 @@ struct ProfileView: View {
             Form {
                 Section(header: Text("Personal Information")) {
                     TextField("Name", text: $viewModel.name)
+                        .textContentType(.name)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
                     TextField("Age", text: $viewModel.age)
+                        .keyboardType(.numberPad)
                     TextField("Gender", text: $viewModel.gender)
+                        .textContentType(.name)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
                     TextField("Email", text: $viewModel.email)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
+                        .disableAutocorrection(true)
                 }
                 Section(header: Text("Password")) {
                     SecureField("New Password", text: $viewModel.newpasswd)
                     SecureField("Enter New Password again", text: $viewModel.newpasswd2)
+                }
+                Button(action: {
+                    // Action for the underlined text button
+                    Authenticator.id = nil
+                    Authenticator.name = ""
+                    Authenticator.email = ""
+                    Authenticator.age = nil
+                    Authenticator.gender = ""
+                    Authenticator.shared.isAuthenticated = false
+                }) {
+                    Text("Log out")
+                       
                 }
             }
             
@@ -40,6 +62,7 @@ struct ProfileView: View {
                 Alert(title: Text("Update Profile"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
             }
         }
+        .navigationTitle("Profile")
     }
 }
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SigninView: View {
+struct SignupView: View {
     @State private var isSidebarShowing = false
     @State private var name = ""
     @State private var email = ""
@@ -32,37 +32,41 @@ struct SigninView: View {
                     .frame(maxWidth: .infinity)
             }
             .padding(20)
-            HStack{
-                Text("Sign in")
-                    .font(.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-            }
-            
+          
             VStack {
                 TextField("Name", text: $name)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
+                    .textContentType(.name)
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
                 
                 TextField("Age", text: $age)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
+                    .keyboardType(.numberPad)
                 
                 TextField("Gender", text: $gender)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
+                    .textContentType(.name)
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
                 
                 TextField("Email", text: $email)
                     .padding(.vertical, 10)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+                    .disableAutocorrection(true)
                 
                 SecureField("Password", text: $password)
                     .padding(.vertical, 10)
@@ -93,7 +97,7 @@ struct SigninView: View {
             
            
             VStack {
-                Text("By Signing in, you agree to our Terms of Service and Privacy Policy. You also agree to receive marketing communications from us.")
+                Text("By Signing up, you agree to our Terms of Service and Privacy Policy. You also agree to receive marketing communications from us.")
                     .font(.caption)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
@@ -103,7 +107,7 @@ struct SigninView: View {
             }
             Spacer()
         }
-        .navigationTitle("Sign In")
+        .navigationTitle("Sign Up")
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Sign Up"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
@@ -152,5 +156,5 @@ struct SigninView: View {
 }
 
 #Preview {
-    SigninView()
+    SignupView()
 }

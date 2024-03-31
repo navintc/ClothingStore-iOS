@@ -53,8 +53,8 @@ struct LoginView: View {
                         Text("Still dont have an account?")
                             .font(.caption)
                         
-                        NavigationLink(destination: SigninView()) {
-                                Text("Sign in")
+                        NavigationLink(destination: SignupView()) {
+                                Text("Sign Up")
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color.gray.opacity(0.5))
