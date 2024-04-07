@@ -112,7 +112,7 @@ struct HomeView: View {
         .navigationViewStyle(.stack)
         .onChange(of: selectedCategory) { newValue in
             if let category = newValue {
-                navigateToCatSearch = true // Trigger navigation to CatSearchView when a category is selected
+                navigateToCatSearch = true // Trigger navigation to CatSearchView
             }
         }
     }

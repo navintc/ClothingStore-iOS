@@ -69,12 +69,9 @@ struct CatSearchView: View {
                     }
                 }
                 .padding()
-               
             }
             .background(Color.gray.opacity(0.1).ignoresSafeArea())
             .navigationTitle("Catagories")
-            
-            
         }
         .onAppear {
             viewModel.fetchClothCategory(cat: category ?? "Unknown")

@@ -88,11 +88,3 @@ struct LoginView: View {
         .navigationViewStyle(.stack)
     }
 }
-
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewModel = LoginViewModel() // Assuming you have a LoginViewModel
-//        
-//        return LoginView(viewModel: viewModel)
-//    }
-//}

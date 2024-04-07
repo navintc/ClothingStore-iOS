@@ -22,6 +22,9 @@ struct PaymentView: View {
     
     @State private var paymentSuccess = false
     
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    
     @Binding var rootIsActive : Bool
     
     @ObservedObject var updateTrigger = CartUpdateTrigger()
@@ -44,7 +47,7 @@ struct PaymentView: View {
                     TextField("Card Number", text: $cardNumber)
                         .keyboardType(.numberPad)
                         .textContentType(.creditCardNumber)
-                    TextField("Exp Date", text: $expDate)
+                    TextField("Exp Date (Eg: 12/30)", text: $expDate)
                         .keyboardType(.numbersAndPunctuation)
                     TextField("CVV", text: $cvv)
                         .keyboardType(.numberPad)
@@ -65,15 +68,17 @@ struct PaymentView: View {
             
             HStack {
                 Button(action: {
-                    authenticateUser { success, error in
-                        if success {
-                            // Authentication was successful, proceed with the payment
-                            makePaymentRequest()
-                            paymentSuccess = true
-                        } else {
-                            // Authentication failed
-                            print(error?.localizedDescription ?? "Authentication failed")
-                            paymentSuccess = false
+                    if (validateData()){
+                        authenticateUser { success, error in
+                            if success {
+                                // Authentication was successful, proceed with the payment
+                                makePaymentRequest()
+                                paymentSuccess = true
+                            } else {
+                                // Authentication failed
+                                print(error?.localizedDescription ?? "Authentication failed")
+                                paymentSuccess = false
+                            }
                         }
                     }
                     
@@ -90,6 +95,9 @@ struct PaymentView: View {
             
         }
         .navigationTitle("Payment Details")
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Sign Up"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
     
     func authenticateUser(completion: @escaping (Bool, Error?) -> Void) {
@@ -114,6 +122,7 @@ struct PaymentView: View {
 
     
     func makePaymentRequest() {
+       
         let items = GlobalVariables.globalCart.map { "\($0.item.id)-\($0.size)" }.joined(separator: ", ")
         let payment = GlobalVariables.globalCart.reduce(0) { $0 + $1.item.price }
         
@@ -127,6 +136,8 @@ struct PaymentView: View {
             "items": items,
             "country": country
         ]
+        
+        print(parameters)
         
         guard let url = URL(string: "http://localhost:3000/api/bills") else {
             print("Invalid URL")
@@ -158,5 +169,62 @@ struct PaymentView: View {
                 }
             }
         }.resume()
+        
+    }
+    
+    private func validateData()  -> Bool {
+        let isNameValid = !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let isCVVValid = isValidCVV(cvv)
+        let isCardValid = isValidCreditCardNumber(cardNumber)
+        
+        if !isNameValid{
+            self.alertMessage = "Enter a valid name"
+            self.showingAlert = true
+        } else if !isCardValid{
+            self.alertMessage = "Enter a valid card"
+            self.showingAlert = true
+        } else if !isCVVValid{
+            self.alertMessage = "Enter a valid CVV"
+            self.showingAlert = true
+        } else if addressname.isEmpty{
+            self.alertMessage = "Enter your Address name"
+            self.showingAlert = true
+        } else if address1.isEmpty{
+            self.alertMessage = "Enter you Adress line 1"
+            self.showingAlert = true
+        } else if address2.isEmpty{
+            self.alertMessage = "Enter your Address line 2"
+            self.showingAlert = true
+        } else if city.isEmpty{
+            self.alertMessage = "Enter your City"
+            self.showingAlert = true
+        } else if country.isEmpty{
+            self.alertMessage = "Enter your Country"
+            self.showingAlert = true
+        } else {
+            return true
+        }
+        
+        return false
+    }
+    
+    private func isValidCVV(_ cvv: String) -> Bool {
+        let pattern = "^[0-9]{3,4}$"
+        return cvv.range(of: pattern, options: .regularExpression) != nil
+    }
+    
+    private func isValidCreditCardNumber(_ number: String) -> Bool {
+        // Visa: Starts with 4
+        // MasterCard: Starts with 51-55 or 2221-2720
+        // American Express (Amex): Starts with 34 or 37
+        // Discover: Starts with 6011, 65, 644-649, 622126-622925
+        let pattern = "^4[0-9]{12}(?:[0-9]{3})?$" +         // Visa
+                      "|^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$" + // MasterCard
+                      "|^3[47][0-9]{13}$" +                // American Express
+                      "|^6(?:011|5[0-9]{2}|4[4-9][0-9])[0-9]{12}$" + // Discover
+                      "|^(?:2131|1800|35\\d{3})\\d{11}$"  // JCB
+
+        let regex = try? NSRegularExpression(pattern: pattern)
+        return regex?.firstMatch(in: number, options: [], range: NSRange(location: 0, length: number.utf16.count)) != nil
     }
 }

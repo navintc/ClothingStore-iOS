@@ -115,43 +115,66 @@ struct SignupView: View {
     
     
     func signUp() {
-        guard let url = URL(string: "http://localhost:3000/api/users") else {
-            self.alertMessage = "Invalid URL."
+        let isNameValid = !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let isAgeValid = Int(age) != nil && (0...120).contains(Int(age)!)
+        let isEmailValid = isValidEmail(email)
+        
+        if !isNameValid{
+            self.alertMessage = "Enter a valid name"
             self.showingAlert = true
-            return
+        } else if !isAgeValid{
+            self.alertMessage = "Enter a valid age"
+            self.showingAlert = true
+        } else if !isEmailValid{
+            self.alertMessage = "Enter a valid email"
+            self.showingAlert = true
         }
         
-        if (password == password2){
-            let user = UserUpdate(name: name, email: email, age: Int(age) ?? 0, gender: gender, passwd: password)
-            
-            guard let jsonData = try? JSONEncoder().encode(user) else {
-                self.alertMessage = "Failed to encode user data."
+        
+        if isNameValid && isAgeValid && isEmailValid {
+            guard let url = URL(string: "http://localhost:3000/api/users") else {
+                self.alertMessage = "Invalid URL."
                 self.showingAlert = true
                 return
             }
             
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpBody = jsonData
-            
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 {
-                    DispatchQueue.main.async {
-                        self.alertMessage = "Sign up successful!"
-                        self.showingAlert = true
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.alertMessage = "Sign up failed: \(error?.localizedDescription ?? "Unknown error")"
-                        self.showingAlert = true
-                    }
+            if (!password.isEmpty && password == password2){
+                let user = UserUpdate(name: name, email: email, age: Int(age) ?? 0, gender: gender, passwd: password)
+                
+                guard let jsonData = try? JSONEncoder().encode(user) else {
+                    self.alertMessage = "Failed to encode user data."
+                    self.showingAlert = true
+                    return
                 }
-            }.resume()
-        } else {
-            self.alertMessage = "Passwords are not matching"
-            self.showingAlert = true
+                
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpBody = jsonData
+                
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 {
+                        DispatchQueue.main.async {
+                            self.alertMessage = "Sign up successful!"
+                            self.showingAlert = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.alertMessage = "Sign up failed: \(error?.localizedDescription ?? "Unknown error")"
+                            self.showingAlert = true
+                        }
+                    }
+                }.resume()
+            } else {
+                self.alertMessage = "Passwords are not matching"
+                self.showingAlert = true
+            }
         }
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return email.range(of: pattern, options: .regularExpression) != nil
     }
 }
 
